@@ -18,6 +18,54 @@ public class Produto {
         this.valor = valor;
     }
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDataColheita() {
+        return dataColheita;
+    }
+
+    public void setDataColheita(String dataColheita) {
+        this.dataColheita = dataColheita;
+    }
+
+    public String getNomeAgricultor() {
+        return nomeAgricultor;
+    }
+
+    public void setNomeAgricultor(String nomeAgricultor) {
+        this.nomeAgricultor = nomeAgricultor;
+    }
+
+    public int getqEstoque() {
+        return qEstoque;
+    }
+
+    public void setqEstoque(int qEstoque) {
+        this.qEstoque = qEstoque;
+    }
+
+    public float getValor() {
+        return valor;
+    }
+
+    public void setValor(float valor) {
+        this.valor = valor;
+    }
+
     
     @Override
     public String toString(){

@@ -20,6 +20,7 @@ public class TelaRelatorioDeVendas extends javax.swing.JFrame {
     public TelaRelatorioDeVendas() {
         initComponents();
         addRowToJtable();
+        totalDia();
     }
     
     public void addRowToJtable(){
@@ -32,6 +33,14 @@ public class TelaRelatorioDeVendas extends javax.swing.JFrame {
             rowData[3] = manFun.vendas.get(i).quantidade;
             rowData[4] = manFun.vendas.get(i).precoTotal;
             model.addRow(rowData);
+        }
+    }
+    
+    public void totalDia(){
+        float totalDia = 0;
+        for(int i=0; i<manFun.vendas.size(); i++){
+            totalDia = manFun.vendas.get(i).precoTotal + totalDia;
+            jTextFieldTotalVendas.setText(String.valueOf(totalDia));
         }
     }
     /**
@@ -48,6 +57,8 @@ public class TelaRelatorioDeVendas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableVendas = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jTextFieldTotalVendas = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -62,14 +73,14 @@ public class TelaRelatorioDeVendas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Data da compra", "Comprador", "Produto", "Quantidade", "Valor"
+                "Data da compra", "Comprador", "Produto", "Quantidade", "Total"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, true
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -90,6 +101,15 @@ public class TelaRelatorioDeVendas extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setText("Total Vendas:");
+
+        jTextFieldTotalVendas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldTotalVendasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -100,7 +120,10 @@ public class TelaRelatorioDeVendas extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldTotalVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(344, 344, 344)
@@ -115,7 +138,11 @@ public class TelaRelatorioDeVendas extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldTotalVendas, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10)))
                 .addContainerGap())
         );
 
@@ -139,6 +166,10 @@ public class TelaRelatorioDeVendas extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextFieldTotalVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTotalVendasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldTotalVendasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,8 +216,10 @@ public class TelaRelatorioDeVendas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableVendas;
+    private javax.swing.JTextField jTextFieldTotalVendas;
     // End of variables declaration//GEN-END:variables
 }

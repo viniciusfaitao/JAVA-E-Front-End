@@ -17,7 +17,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 
@@ -152,6 +155,11 @@ public class TelaRealizarVenda extends javax.swing.JFrame {
         jTextFieldProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldProdutoActionPerformed(evt);
+            }
+        });
+        jTextFieldProduto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextFieldProdutoKeyTyped(evt);
             }
         });
 
@@ -401,20 +409,19 @@ public class TelaRealizarVenda extends javax.swing.JFrame {
                int quantidade = Integer.valueOf(jTextFieldQuantidade.getText());
                float preco = Float.valueOf(jTextFieldValorItem.getText());
                float precoTotal = Float.valueOf(jTextFieldValorTotal.getText());
-
-               Venda ven = new Venda(comprador, data, produto, quantidade, preco, precoTotal);
-            for(Produto prod: produtos){ 
-                if(quantidade <= prod.qEstoque){
-
-                   JOptionPane.showMessageDialog(this,"Venda realizada com sucesso!!");
-
-                   ManipularFuncoes.cadastrarVenda(ven);
-                   prod.qEstoque--;
-                   this.dispose();
-                }else if (quantidade <= 0 || quantidade > prod.qEstoque){
-                    JOptionPane.showMessageDialog(this,"Quantidade maior que estoque!!");
+                for(Produto prod: produtos){
+                    if(produto.equals(prod.nome)){
+                        if(quantidade <= prod.qEstoque){
+                            JOptionPane.showMessageDialog(this,"Venda realizada com sucesso!!");
+                            Venda ven = new Venda(comprador, data, produto, quantidade, preco, precoTotal);
+                            ManipularFuncoes.cadastrarVenda(ven);
+                            prod.setqEstoque(prod.getqEstoque() - quantidade); 
+                            this.dispose();
+                        }else if (quantidade <= 0 || quantidade > prod.qEstoque){
+                            JOptionPane.showMessageDialog(this,"Valor de estoque Inválido!!");
+                        }
+                    }
                 }
-            }
         }
     }//GEN-LAST:event_FinalizarVendaActionPerformed
 
@@ -432,6 +439,14 @@ public class TelaRealizarVenda extends javax.swing.JFrame {
             jTextFieldQuantidade.setText("1");
         }
     }//GEN-LAST:event_tabelaPesquisa1MouseClicked
+
+    private void jTextFieldProdutoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldProdutoKeyTyped
+        // TODO add your handling code here:
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(((DefaultTableModel) tabelaPesquisa1.getModel())); 
+        sorter.setRowFilter(RowFilter.regexFilter(jTextFieldProduto.getText()));
+
+        tabelaPesquisa1.setRowSorter(sorter);
+    }//GEN-LAST:event_jTextFieldProdutoKeyTyped
 
     /**
      * @param args the command line arguments
