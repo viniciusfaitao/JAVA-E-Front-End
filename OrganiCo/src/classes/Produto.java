@@ -1,20 +1,21 @@
 package classes;
 
 public class Produto {
-    private String tipo;
-    private String nome;
-    private String dataColheita;
-    private String nomeAgricultor;
-    private float valor;
-    private int qEstoque;
+    public String tipo;
+    public String nome;
+    public String dataColheita;
+    public String nomeAgricultor;
+    public int qEstoque;
+    public float valor;
 
-    public Produto(String tipo, String nome, String dataColheita, String nomeAgricultor, float valor, int qEstoque) {
+
+    public Produto(String tipo, String nome, String dataColheita, String nomeAgricultor, int qEstoque, float valor) {
         this.tipo = tipo;
         this.nome = nome;
         this.dataColheita = dataColheita;
         this.nomeAgricultor = nomeAgricultor;
-        this.valor = valor;
         this.qEstoque = qEstoque;
+        this.valor = valor;
     }
 
     

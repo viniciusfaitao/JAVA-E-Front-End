@@ -5,14 +5,15 @@ import java.util.Scanner;
 
 public class ManipularFuncoes{
     Scanner leitura = new Scanner(System.in);
-    ArrayList<Venda> vendas = new ArrayList<>();
-    private static ArrayList<Produto> produtos = new ArrayList<>();
-
+    public static ArrayList<Produto> produtos = new ArrayList<>();
+    public static ArrayList<Venda> vendas = new ArrayList<>();
     
     public static void cadastrarProduto(Produto prod){
         produtos.add(prod);
-        
-        System.out.println("Produto cadastrado com sucesso!!" + prod);
+    }
+    
+    public static void cadastrarVenda(Venda ven){
+        vendas.add(ven);
     }
     
 }

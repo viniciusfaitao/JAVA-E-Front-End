@@ -1,19 +1,23 @@
+
 package classes;
 
-public class Venda extends Produto{
-    private int quantidade;
+public class Venda{
+    public static int venda;
+    public String nomeComprador;
+    public String dataCompra;
+    public String produto;
+    public int quantidade;
+    public float preco;
+    public float precoTotal;
 
-    public Venda(int quantidade, String tipo, String nome, String dataColheita, String nomeAgricultor, float valor, int qEstoque) {
-        super(tipo, nome, dataColheita, nomeAgricultor, valor, qEstoque);
+    public Venda(String nomeComprador, String dataCompra, String produto, int quantidade, float preco, float precoTotal) {
+        this.venda = ++venda;
+        this.nomeComprador = nomeComprador;
+        this.dataCompra = dataCompra;
+        this.produto = produto;
         this.quantidade = quantidade;
+        this.preco = preco;
+        this.precoTotal = precoTotal;
     }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
+    
 }
