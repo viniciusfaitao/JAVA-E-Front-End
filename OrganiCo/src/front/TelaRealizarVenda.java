@@ -395,19 +395,26 @@ public class TelaRealizarVenda extends javax.swing.JFrame {
         if(produtos.isEmpty()){
             JOptionPane.showMessageDialog(this,"Nenhum produto cadastrado!!");
         }else{
-         String comprador = nomeComprador.getText();
-            String data = jFormattedTextFieldData.getText();
-            String produto = jTextFieldProduto.getText();
-            int quantidade = Integer.valueOf(jTextFieldQuantidade.getText());
-            float preco = Float.valueOf(jTextFieldValorItem.getText());
-            float precoTotal = Float.valueOf(jTextFieldValorTotal.getText());
+               String comprador = nomeComprador.getText();
+               String data = jFormattedTextFieldData.getText();
+               String produto = jTextFieldProduto.getText();
+               int quantidade = Integer.valueOf(jTextFieldQuantidade.getText());
+               float preco = Float.valueOf(jTextFieldValorItem.getText());
+               float precoTotal = Float.valueOf(jTextFieldValorTotal.getText());
 
-            Venda ven = new Venda(comprador, data, produto, quantidade, preco, precoTotal);
-            JOptionPane.showMessageDialog(this,"Venda realizada com sucesso!!");
+               Venda ven = new Venda(comprador, data, produto, quantidade, preco, precoTotal);
+            for(Produto prod: produtos){ 
+                if(quantidade <= prod.qEstoque){
 
-            ManipularFuncoes.cadastrarVenda(ven);
+                   JOptionPane.showMessageDialog(this,"Venda realizada com sucesso!!");
 
-            this.dispose();
+                   ManipularFuncoes.cadastrarVenda(ven);
+                   prod.qEstoque--;
+                   this.dispose();
+                }else if (quantidade <= 0 || quantidade > prod.qEstoque){
+                    JOptionPane.showMessageDialog(this,"Quantidade maior que estoque!!");
+                }
+            }
         }
     }//GEN-LAST:event_FinalizarVendaActionPerformed
 
